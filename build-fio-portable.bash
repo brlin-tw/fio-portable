@@ -68,7 +68,9 @@ main(){
     yum install \
         -y \
         curl \
-        devtoolset-7 \
+        devtoolset-7-binutils \
+        devtoolset-7-gcc \
+        devtoolset-7-make \
         git \
         libaio-devel \
         zlib-devel \
