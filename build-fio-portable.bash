@@ -145,7 +145,7 @@ main(){
     local dist_version
     if test "${git_describe}" != "${git_commit_hash}"; then
         # This is a tag release
-        dist_version="${git_describe}"
+        dist_version="${git_describe#v}"
     else
         dist_version=g"${git_commit_hash}"
     fi
