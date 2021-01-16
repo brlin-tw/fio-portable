@@ -151,7 +151,7 @@ main(){
     else
         dist_version=g"${git_commit_hash}"
     fi
-    dist_name=fio-"${fio_latest_version}"-dist-"${dist_version}"-amd64
+    dist_name=fio-portable-"${fio_latest_version}"-dist-"${dist_version}"-amd64
 
     mkdir \
         --verbose \
