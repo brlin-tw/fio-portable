@@ -131,11 +131,25 @@ main(){
         'Creating distribution folder...'
     git_describe="$(
         git describe \
+            --abbrev=7 \
             --always \
             --dirty \
             --tags
     )"
-    dist_name=fio-"${fio_latest_version}"-dist-g"${git_describe#v}"-amd64
+    git_commit_hash="$(
+        git describe \
+            --abbrev=7 \
+            --always \
+            --dirty
+    )"
+    local dist_version
+    if test "${git_describe}" != "${git_commit_hash}"; then
+        # This is a tag release
+        dist_version="${git_describe}"
+    else
+        dist_version=g"${git_commit_hash}"
+    fi
+    dist_name=fio-"${fio_latest_version}"-dist-"${dist_version}"-amd64
 
     mkdir \
         --verbose \
