@@ -7,6 +7,8 @@ SPDX-License-Identifier: GPL-2.0-only
 
 Pre-built fio distribution at your fingertips!
 
+[![Continuous Integration(CI) Status Badge](https://cloud.drone.io/api/badges/Lin-Buo-Ren/fio-portable/status.svg "Continuous Integration(CI) Status")](https://cloud.drone.io/Lin-Buo-Ren/fio-portable)
+
 ## Introduction
 
 Due to the frequent need from my previous job at SinoItan Technology Co., Ltd. I created this distribution during my free time at weekend, have fun!
