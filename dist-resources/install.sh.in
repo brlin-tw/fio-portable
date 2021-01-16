@@ -1,0 +1,33 @@
+#!/usr/bin/env sh
+# Install software from deployment package
+#
+# Copyright 2021 林博仁(Buo-ren, Lin) <Buo.Ren.Lin@gmail.com>
+# SPDX-License-Identifier: GPL-2.0-only
+
+set -eu
+
+DIST_NAME="__DIST_NAME__"
+
+script="$(realpath --strip "${0}")"
+script_dir="${script%/*}"
+
+if test "$(id --user)" != 0; then
+    echo Error: This program requires superuser privileges to run. 1>&2
+fi
+
+installation_prefix="${PREFIX:=/opt/"${DIST_NAME}"}"
+mkdir \
+    --parents \
+    "${installation_prefix}"
+cp \
+    --archive \
+    --force \
+    --recursive \
+    --verbose \
+    "${script_dir}"/* \
+    "${installation_prefix}"
+rm \
+    --verbose \
+    "${installation_prefix}"/install.sh
+
+echo Installation completed.
