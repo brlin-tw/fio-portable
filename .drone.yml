@@ -41,16 +41,20 @@ steps:
     commands:
       - ./continuous-integration/static-code-analysis.sh
 
-  # - name: Generate and deliver built artifacts
-  #   depends_on:
-  #     - Fetching Git tags
-  #     - Fetching Git submodules
-  #   when:
-  #     event:
-  #       - tag
-  #   image: alpine:3.12
-  #   environment:
-  #     GITLAB_AUTH_TOKEN:
-  #       from_secret: gitlab_auth_token
-  #   commands:
-  #     - ./continuous-integration/deliver-built-artifacts.sh
+  - name: Build distribution package
+    depends_on:
+      - Fetching Git tags
+    image: centos:7
+    commands:
+      - ./build-fio-portable.bash
+
+  - name: Deliver release to GitHub
+    when:
+      event: tag
+    depends_on:
+      - Build distribution package
+    image: plugins/github-release
+    settings:
+      api_key:
+        from_secret: github_api_token
+      files: fio-*-dist-*.tar*
